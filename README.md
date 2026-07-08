@@ -50,6 +50,3 @@ Dark-first, near-monochrome, glassmorphic surfaces (`glass-card` / `glass-panel`
 
 See [TODO.md](./TODO.md) for exactly what's fully wired up versus what's stubbed with a documented next step (Spotify OAuth, Windows/Google Calendar, app icon, etc). Every mode in the brief renders and is interactive today; a few external integrations that need real API credentials ship with clearly-labeled demo data so nothing in the UI is ever blank.
 
-=======
-# Glance-
-A premium "StandBy mode for Windows second screens"
