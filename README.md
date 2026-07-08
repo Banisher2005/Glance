@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Glance
 
 A premium ambient dashboard for a second display — built for Windows, inspired by Apple's StandBy mode, designed for power users running a spare monitor (or an Android tablet via SpaceDesk) next to their main screen.
