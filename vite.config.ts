@@ -14,7 +14,10 @@ export default defineConfig({
         vite: {
           build: {
             outDir: 'dist-electron',
-            rollupOptions: { external: ['electron-store', 'systeminformation'] },
+            rollupOptions: {
+              external: ['electron-store', 'systeminformation'],
+              output: { format: 'cjs' },
+            },
           },
         },
       },
@@ -23,6 +26,9 @@ export default defineConfig({
         vite: {
           build: {
             outDir: 'dist-electron',
+            rollupOptions: {
+              output: { format: 'cjs' },
+            },
           },
         },
         onstart(args) {

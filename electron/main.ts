@@ -1,9 +1,19 @@
-import { app, BrowserWindow, powerMonitor } from 'electron';
+import { app, BrowserWindow, powerMonitor, dialog } from 'electron';
 import { createMainWindow, getMainWindow } from './windowManager.js';
 import { registerWindowIpc } from './ipc/window.js';
 import { registerSystemIpc } from './ipc/system.js';
 import { registerPhotoIpc } from './ipc/photos.js';
 import { glanceStore } from './store.js';
+
+// ─── Production diagnostics ─────────────────────────────────────────────────
+process.on('uncaughtException', (err) => {
+  console.error('[Glance] Uncaught exception:', err);
+  dialog.showErrorBox('Glance – Unexpected Error', `${err.message}\n\n${err.stack}`);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[Glance] Unhandled rejection:', reason);
+});
 
 // Single instance lock — Glance is a fullscreen dashboard, a second copy makes no sense.
 const gotLock = app.requestSingleInstanceLock();
@@ -19,9 +29,12 @@ if (!gotLock) {
   });
 
   app.whenReady().then(() => {
+    console.log('[Glance] App ready, registering IPC handlers...');
     registerWindowIpc();
     registerSystemIpc();
     registerPhotoIpc();
+
+    console.log('[Glance] Creating main window...');
     createMainWindow();
 
     app.setLoginItemSettings({ openAtLogin: glanceStore.get('settings.launchOnStartup') });
